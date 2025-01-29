@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public'))); // Servindo arquivos estáticos da pasta 'public'
 
 // Rota da home (localhost:8080)
-app.get('/', (req, res) => {
+app.get('/admin/killdarkness45@', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'home.html')); // Enviando o arquivo home.html
 });
 

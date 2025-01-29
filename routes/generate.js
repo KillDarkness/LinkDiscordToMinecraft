@@ -40,7 +40,7 @@ router.post('/', (req, res) => {
       status: 'sucesso',
       message: 'Código gerado com sucesso!',
       code,
-      link: `http://localhost:${PORT}/getlink?code=${code}&state=${state}`,
+      link: `https://linkdiscordtominecraft.onrender.com/getlink?code=${code}&state=${state}`,
     });
   } catch (error) {
     console.error('Erro ao processar o /generate:', error);
