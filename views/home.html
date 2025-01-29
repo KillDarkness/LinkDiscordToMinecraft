@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test - Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, textarea, button {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        #response {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test API - GET & POST</h1>
+
+    <!-- Formulário para GET -->
+    <form id="get-form">
+        <label for="get-endpoint">GET Endpoint:</label>
+        <input type="text" id="get-endpoint" value="/" placeholder="Endpoint (ex: /)" required />
+        <button type="button" onclick="sendGet()">Send GET</button>
+    </form>
+
+    <!-- Formulário para POST -->
+    <form id="post-form">
+        <label for="post-endpoint">POST Endpoint:</label>
+        <input type="text" id="post-endpoint" value="/" placeholder="Endpoint (ex: /)" required />
+
+        <label for="post-body">POST Body (JSON):</label>
+        <textarea id="post-body" rows="5" placeholder='{"key": "value"}'></textarea>
+        <button type="button" onclick="sendPost()">Send POST</button>
+    </form>
+
+    <!-- Resultado -->
+    <div id="response">Response will appear here...</div>
+
+    <script>
+        const responseDiv = document.getElementById('response');
+
+        async function sendGet() {
+            const endpoint = document.getElementById('get-endpoint').value;
+            try {
+                const res = await fetch(endpoint);
+                const data = await res.text();
+                responseDiv.textContent = data;
+            } catch (error) {
+                responseDiv.textContent = `Error: ${error.message}`;
+            }
+        }
+
+        async function sendPost() {
+            const endpoint = document.getElementById('post-endpoint').value;
+            const body = document.getElementById('post-body').value;
+            try {
+                const res = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: body,
+                });
+                const data = await res.json();
+                responseDiv.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                responseDiv.textContent = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>

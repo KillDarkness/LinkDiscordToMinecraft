@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/getlink.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <!-- Aqui pode adicionar mais conteúdo se necessário -->
+      </div>
+      <h2 class="title" style="color: green;">DracHard - Conta Vinculada!</h2> <!-- Alterado para verde -->
+      <div style="margin-bottom: 20px;">
+        <p>A sua conta foi verificada com sucesso! Agora você pode acessar o nosso servidor do Discord.</p> <!-- Mensagem de sucesso -->
+      </div>
+      <div class="profile">
+        <div class="profile">
+          <img src="<%= discordAvatar %>" alt="Avatar" class="avatar" />
+          <p class="username"><%= discordUsername %> (Discord)</p>
+        </div>
+        <div class="profile">
+          <img src="https://i.pinimg.com/474x/54/f4/b5/54f4b55a59ff9ddf2a2655c7f35e4356.jpg" alt="User Avatar" class="avatar" />
+          <p class="username"><%= userData.username %> (Minecraft)</p>
+        </div>
+      </div>
+      <button class="btn" onclick="window.location.href='https://discord.gg/SEU_LINK_DO_DISCORD'">
+        <img src="https://logodownload.org/wp-content/uploads/2017/11/discord-logo-1-1.png" alt="Discord Icon" /> Entrar no nosso Discord
+      </button>
+    </div>
+
+    <script>
+      function startAuth(state) {
+        localStorage.setItem('auth_state', state);
+        window.location.href =
+          'https://discord.com/oauth2/authorize?client_id=<%= process.env.CLIENT_ID %>&redirect_uri=<%= encodeURIComponent(process.env.REDIRECT_URI) %>&response_type=code&scope=identify&state=' + state;
+      }
+    </script>
+  </body>
+</html>
